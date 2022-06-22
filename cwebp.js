@@ -7,13 +7,11 @@ let infile = "sample1.jpg";
 let outfile = "sample1.webp";
 let quality = "80";
 let method = 6;
-let newDimension = "400";
 let newWidth = 400;
-let newHeight = 400;
+let newHeight = 0;
 
 let commands = {
 	encoder: "cwebp",
-	encoderPath: "libwebp-1.2.2-windows-x64/bin/cwebp.exe",
 	out: "-o",
 	quality: "-q",
 	method: "-m",
@@ -22,7 +20,7 @@ let commands = {
 };
 
 let child = cp.execFile(
-	commands.encoderPath,
+	commands.encoder,
 	[
 		commands.multiThread,
 		commands.quality,
@@ -35,8 +33,7 @@ let child = cp.execFile(
 
 		commands.resize,
 		newWidth,
-		0,
-		// newDimension,
+		newHeight,
 	],
 	{ cwd: "./" },
 	(error, stdout, stderr) => {
