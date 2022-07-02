@@ -3,12 +3,14 @@ const cp = require("child_process");
 const infilePath = "./public/in";
 const outfilePath = "./public/out";
 
-let infile = "sample1.jpg";
-let outfile = "sample1.webp";
+const args = process.argv.slice(2);
+
+let infile = args.length ? args[0] : "sample1.jpg";
+let outfile = `${infile.split(".")[0]}.webp`;
 let quality = "80";
 let method = 6;
-let newWidth = 400;
-let newHeight = 0;
+let newWidth = args.length > 1 ? args[1] : 512;
+let newHeight = args.length > 2 ? args[2] : 0;
 
 let commands = {
 	encoder: "cwebp",
